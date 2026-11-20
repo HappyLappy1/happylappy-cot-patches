@@ -140,11 +140,6 @@
 
 
 .open "overlay29.bin", overlay29_start
-    //.org HasLastUsedMove + 0x30; // Turn HasUsedLastMove into GetLastUsedMoveId (1-indexed, so no last used move would still yield "false")
-    //.area 0x4
-    //    addne, r0, r3, #0x1
-    //.endarea
-
     .org StatusCheckerCheck; // Replace the entire vanilla function!
     .area StatusCheckerCheckOnTarget - StatusCheckerCheck - 0x24; // The specific EntityIsValid function between these two needs to be preserved!
         push {r2-r12,lr}

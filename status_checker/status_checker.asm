@@ -314,9 +314,9 @@
                 ldr r7, [r4]
                 mov r0, r7
                 bl EntityIsValid
-                cmp r0, #0x1
+                cmp r0, #0x0
                 cmpne r7, r11
-                bne acupressure_sight_loop_increment
+                beq acupressure_sight_loop_increment
                 mov r0, r11
                 mov r1, r7
                 bl CanSeeTarget
@@ -327,7 +327,8 @@
                 cmp r0, r8
                 ldrge r0, [r1, #0x28]
                 cmpge r0, r8
-                bge StatusCheckerUniversalIncrementCondition
+                poplt {r5,r7,r8}
+                blt StatusCheckerUniversalIncrementCondition
             acupressure_sight_loop_increment:
                 add r4, #0x4
                 subs r5, #0x1
@@ -454,9 +455,9 @@
                 ldr r7, [r4]
                 mov r0, r7
                 bl EntityIsValid
-                cmp r0, #0x1
+                cmp r0, #0x0
                 cmpne r7, r11
-                bne helping_hand_sight_loop_increment
+                beq helping_hand_sight_loop_increment
                 mov r0, r11
                 mov r1, r7
                 bl CanSeeTarget
@@ -465,7 +466,8 @@
                 ldr r1, [r7, #0xB4]
                 ldr r0, [r1, #0x24]
                 cmp r0, r8
-                bge StatusCheckerUniversalIncrementCondition
+                poplt {r5,r7,r8}
+                blt StatusCheckerUniversalIncrementCondition
             helping_hand_sight_loop_increment:
                 add r4, #0x4
                 subs r5, #0x1
@@ -556,9 +558,9 @@
                 ldr r7, [r4]
                 mov r0, r7
                 bl EntityIsValid
-                cmp r0, #0x1
+                cmp r0, #0x0
                 cmpne r7, r11
-                bne lucky_chant_sight_loop_increment
+                beq lucky_chant_sight_loop_increment
                 mov r0, r11
                 mov r1, r7
                 bl CanSeeTarget
@@ -567,7 +569,8 @@
                 ldr r1, [r7, #0xB4]
                 ldr r0, [r1, #0xD5]
                 cmp r0, #0x11; // is this entity lucky-chanted already?
-                bge StatusCheckerUniversalIncrementCondition
+                popne {r5,r7,r8}
+                bne StatusCheckerUniversalIncrementCondition
             lucky_chant_sight_loop_increment:
                 add r4, #0x4
                 subs r5, #0x1
